@@ -1,12 +1,17 @@
 # import libraries
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 from sqlalchemy import create_engine
 import sys
 
 
 def load_data(messages_filepath, categories_filepath):
+    """
+    load data and merge them
+
+    input- filepaths to .csv data files
+    output- dataframe merging the .csv files
+    """
     #load datasets
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
@@ -18,6 +23,12 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    """
+    perform cleaning, removing duplicates, extracting features, and correcting mestaikes.
+
+    input- dataframe
+    output- cleaned dataframe
+    """
     # create a dataframe of the 36 individual category columns
     categories = df['categories'].str.split(';', expand=True)
 
@@ -45,7 +56,7 @@ def clean_data(df):
     # drop duplicates
     df.drop_duplicates(inplace=True)
 
-    #related column has 2 in some rows, returned to 1
+    #related column has 2 in some rows, returne them to 1
     for i in list(df[df['related']==2]['related'].index):
         df.loc[i, 'related']=1
 
@@ -53,6 +64,12 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    """
+    save a dataframe to a databse
+
+    input- dataframe to be saved, and database path to save the dataframe
+    output- none
+    """
     engine = create_engine(f'sqlite:///{database_filename}')
     df.to_sql('table', engine, index=False)  
 

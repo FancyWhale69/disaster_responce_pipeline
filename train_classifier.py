@@ -21,10 +21,17 @@ import sys
 
 
 def load_data(database_filepath):
+    """
+    load database
+
+    input- path to database
+    output- features, targets, and a list of categories names
+    """
     # load data from database
     engine = create_engine(f'sqlite:///{database_filepath}')
     df = pd.read_sql_table('table', engine)
 
+    #seprate features from target
     X= df['message']
     y=df.drop(['message', 'genre', 'original', 'id'], axis=1)
 
@@ -59,12 +66,20 @@ def tokenize(text):
 
 
 def build_model():
+    """
+    build a ML model
+
+    input-none
+    output- a ML model built using pipeline and gridsearch
+    """
+    #build pipeline
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier(RandomForestClassifier()))
         ])
 
+    #parameters for gridsearch
     parameters = {
     'clf__estimator__n_estimators':[100, 150, 200]
     }
@@ -76,11 +91,23 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    """
+    
+    input-model to evaluate, x_test, y_test, and a list of catogry names
+    output- print a classification_report
+    """
+
     y_pred= model.predict(X_test)
     print(classification_report(Y_test, y_pred, target_names=category_names))
 
 
 def save_model(model, model_filepath):
+    """
+    save a model as a pickle
+
+    input- model to be saved, and model name to save the model
+    output- save model as a pickle file 
+    """
     pickle.dump(model, open(model_filepath, 'wb'))
 
 
