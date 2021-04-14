@@ -71,7 +71,7 @@ def save_data(df, database_filename):
     output- none
     """
     engine = create_engine(f'sqlite:///{database_filename}')
-    df.to_sql('df', engine, index=False)  
+    df.to_sql('df', engine, index=False, if_exists='replace')
 
 
 def main():
