@@ -30,7 +30,7 @@ engine = create_engine('sqlite:///../data/DR.db')
 df = pd.read_sql_table('df', engine)
 
 # load model
-model = joblib.load("../models/model.pkl")
+#model = joblib.load("../models/model.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -42,6 +42,10 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+
+    #add text length feature
+    df['mess_len']=df['message'].apply(len)
+    text_len_mean=df.groupby('genre').mean()['mess_len']
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
@@ -56,6 +60,24 @@ def index():
 
             'layout': {
                 'title': 'Distribution of Message Genres',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Genre"
+                }
+            }
+        },
+                {
+            'data': [
+                Bar(
+                    x=genre_names,
+                    y=text_len_mean
+                )
+            ],
+
+            'layout': {
+                'title': 'Average Text Length Per Genre',
                 'yaxis': {
                     'title': "Count"
                 },
@@ -81,14 +103,14 @@ def go():
     query = request.args.get('query', '') 
 
     # use model to predict classification for query
-    classification_labels = model.predict([query])[0]
-    classification_results = dict(zip(df.columns[4:], classification_labels))
+    #classification_labels = model.predict([query])[0]
+    #classification_results = dict(zip(df.columns[4:], classification_labels))
 
     # This will render the go.html Please see that file. 
     return render_template(
         'go.html',
         query=query,
-        classification_result=classification_results
+        #classification_result=classification_results
     )
 
 
