@@ -30,7 +30,7 @@ engine = create_engine('sqlite:///../data/DR.db')
 df = pd.read_sql_table('df', engine)
 
 # load model
-#model = joblib.load("../models/model.pkl")
+model = joblib.load("../models/model.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -103,14 +103,14 @@ def go():
     query = request.args.get('query', '') 
 
     # use model to predict classification for query
-    #classification_labels = model.predict([query])[0]
-    #classification_results = dict(zip(df.columns[4:], classification_labels))
+    classification_labels = model.predict([query])[0]
+    classification_results = dict(zip(df.columns[4:], classification_labels))
 
     # This will render the go.html Please see that file. 
     return render_template(
         'go.html',
         query=query,
-        #classification_result=classification_results
+        classification_result=classification_results
     )
 
 
