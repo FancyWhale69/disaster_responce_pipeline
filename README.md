@@ -25,7 +25,8 @@ provide the filepaths for messages.csv, categories.csv, database.db where data w
 
 train_classifier.py:  
 provide filepath to the database created from process_data.py and the name you want your model to be saved as with extension .pkl,  
-(Example: python train_classifier.py DisasterResponse.db classifier.pkl) please note that order is important also training the model could take more than 1 hour. 
+(Example: python train_classifier.py DisasterResponse.db classifier.pkl) please note that order is important also training the model could take more than 1 hour.  
+if you want to run run.py, please name your mdoel as model.pkl.  
 
 run.py:  
 run in termnal then go to: http://0.0.0.0:3001/  
