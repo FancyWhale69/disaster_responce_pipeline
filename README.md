@@ -28,7 +28,7 @@ provide filepath to the database created from process_data.py and the name you w
 
 # results Summery  
 by using only CountVectorizer, TfidfTransformer, and a RandomForestClassifier the folloeing results were achived:  
-[img]()
+![img](aa.JPG)
 
 
 # acknowledgment  
