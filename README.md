@@ -37,4 +37,4 @@ by using only CountVectorizer, TfidfTransformer, and a RandomForestClassifier th
 
 
 # acknowledgment  
-i would like to thank figure-eight and udacity for providing the dataset.
+i would like to thank [figure-eight](https://appen.com) and [udacity](https://udacity.com) for providing the dataset.
