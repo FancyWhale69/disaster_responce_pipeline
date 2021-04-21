@@ -1,5 +1,5 @@
 # disaster_responce_pipeline  
-# installation  
+# Installation  
 you will need python, and a list of libraries:  
 1- pandas  
 2- numpy  
@@ -18,7 +18,7 @@ train_classifier.py- this is the ML pipeline responsable for preparing data load
 run.py- used to run a webapp on local machine.  
 
   
-# How to Interact with your project  
+# How To Interact With Your Project  
 process_data.py:  
 provide the filepaths for messages.csv, categories.csv, database.db where data will be pulled from messages.csv and categories.csv then stored in database.db,  
 (Example: python process_data.py disaster_messages.csv disaster_categories.csv DisasterResponse.db) please note that order is important.  
@@ -31,10 +31,10 @@ if you want to run run.py, please name your mdoel as model.pkl.
 run.py:  
 run in termnal then go to: http://0.0.0.0:3001/  
 
-# results Summery  
+# Results Summery  
 by using only CountVectorizer, TfidfTransformer, and a RandomForestClassifier the folloeing results were achived:  
 ![img](aa.JPG)
 
 
-# acknowledgment  
+# Acknowledgment  
 i would like to thank [figure-eight](https://appen.com) and [udacity](https://udacity.com) for providing the dataset.
